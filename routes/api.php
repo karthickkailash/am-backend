@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\Auth\AuthController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/greeting', function () {
     return 'Hello World';
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+});
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
 });

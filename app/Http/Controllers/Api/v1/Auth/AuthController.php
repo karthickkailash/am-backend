@@ -18,6 +18,31 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     summary="Authenticate user and generate JWT token",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"email", "password"},
+     *            @OA\Property(property="email", type="string", format="string", example="Any Valid Emai"),
+     *            @OA\Property(property="password", type="string", format="string", example="123"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="own_con", type="integer", example="1"),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     
+     
+     
+     * )
+     */
+
     public function login(Request $request)
     {
         $request->validate([
@@ -42,6 +67,40 @@ class AuthController extends Controller
             ]
         ]);
     }
+
+
+
+    /**
+    * @OA\Post(
+     *     path="/api/register",
+     *     summary="Register a new user",
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="User's name",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="User's email",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="User's password",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="200", description="User registered successfully"),
+     *     @OA\Response(response="422", description="Validation errors")
+     * )
+     */
+
+
 
     public function register(Request $request)
     {

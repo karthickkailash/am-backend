@@ -17,9 +17,9 @@ use App\Http\Controllers\Api\v1\Auth\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
@@ -29,8 +29,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::group(['middleware' => ['auth']], function() {
+/*Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 });
+*/

@@ -20,7 +20,9 @@ use App\Http\Controllers\Api\v1\Auth\AuthController;
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/
-
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
